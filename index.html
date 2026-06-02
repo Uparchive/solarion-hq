@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOLARION | Plataforma de Streaming</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Fundo com efeito de partículas -->
+    <div id="starfield" class="starfield"></div>
+    
+    <!-- Header/Navegação -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <span class="logo-icon">◆</span>
+                <span class="logo-text">SOLARION</span>
+                <span class="logo-icon">◆</span>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link active">Início</a>
+                <a href="#" class="nav-link">Minha Lista</a>
+                <a href="#" class="nav-link">Explorar</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Banner Principal -->
+    <section class="banner-container">
+        <div class="banner" id="mainBanner">
+            <div class="banner-overlay"></div>
+            <div class="banner-content">
+                <div class="banner-poster">
+                    <img id="bannerPoster" src="" alt="Episódio em destaque">
+                </div>
+                <div class="banner-info">
+                    <h1 id="bannerTitle" class="banner-title">SOLARION</h1>
+                    <p id="bannerDescription" class="banner-description">
+                        Bem-vindo ao universo Solarion. Uma aventura épica de ficção científica te aguarda.
+                    </p>
+                    <div class="banner-actions">
+                        <button class="btn btn-primary" id="playBtn">
+                            ▶ Assistir Agora
+                        </button>
+                        <button class="btn btn-secondary">
+                            + Minha Lista
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Episódios -->
+    <section class="episodes-section">
+        <div class="section-header">
+            <h2 class="section-title">EPISÓDIOS DISPONÍVEIS</h2>
+            <div class="section-line"></div>
+        </div>
+        
+        <div class="episodes-container" id="episodesContainer">
+            <!-- Episódios carregados dinamicamente -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 SOLARION | Universo Cinematográfico de Ficção Científica</p>
+            <div class="footer-links">
+                <a href="#">Sobre</a>
+                <span class="divider">•</span>
+                <a href="#">Privacidade</a>
+                <span class="divider">•</span>
+                <a href="#">Contato</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

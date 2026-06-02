@@ -1,0 +1,773 @@
+/* ================================
+   SOLARION - CSS PRINCIPAL
+   Tema: Cinematográfico Sci-Fi
+   ================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-dark: #0a0e27;
+    --primary-darker: #05070f;
+    --accent-gold: #d4af37;
+    --accent-blue: #00d4ff;
+    --text-primary: #e0e0e0;
+    --text-secondary: #a0a0a0;
+    --border-color: rgba(212, 175, 55, 0.2);
+    --hover-color: rgba(212, 175, 55, 0.1);
+    --transition: all 0.3s ease;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--primary-dark);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* ================================
+   STARFIELD - Fundo com Partículas
+   ================================ */
+
+.starfield {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(2px 2px at 20px 30px, #eee, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 60px 70px, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(1px 1px at 50px 50px, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(1px 1px at 130px 80px, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 90px 10px, #fff, rgba(0, 0, 0, 0));
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    background-position: 0 0, 40px 60px, 130px 270px, 70px 100px, 150px 140px;
+    pointer-events: none;
+    z-index: -1;
+    animation: twinkle 5s infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+}
+
+/* ================================
+   HEADER / NAVEGAÇÃO
+   ================================ */
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(180deg, rgba(10, 14, 39, 0.95) 0%, rgba(10, 14, 39, 0.8) 100%);
+    border-bottom: 1px solid var(--border-color);
+    backdrop-filter: blur(10px);
+    padding: 1.5rem 0;
+}
+
+.header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+}
+
+.logo-icon {
+    color: var(--accent-gold);
+    font-size: 1.2rem;
+}
+
+.logo-text {
+    background: linear-gradient(45deg, var(--accent-gold), var(--accent-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.nav {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    transition: var(--transition);
+    position: relative;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--accent-gold);
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-gold), transparent);
+}
+
+/* ================================
+   BANNER PRINCIPAL
+   ================================ */
+
+.banner-container {
+    position: relative;
+    height: 70vh;
+    min-height: 500px;
+    overflow: hidden;
+    margin-top: 5rem;
+}
+
+.banner {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(212, 175, 55, 0.1) 100%);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, 
+        rgba(10, 14, 39, 0.8) 0%, 
+        rgba(10, 14, 39, 0.3) 50%, 
+        rgba(10, 14, 39, 0.8) 100%);
+    pointer-events: none;
+}
+
+.banner-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    width: 100%;
+    align-items: center;
+}
+
+.banner-poster {
+    position: relative;
+    animation: fadeInLeft 0.8s ease-out;
+}
+
+.banner-poster img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 20px 60px rgba(212, 175, 55, 0.3), 
+                0 0 40px rgba(0, 212, 255, 0.2);
+    border: 2px solid rgba(212, 175, 55, 0.3);
+    transition: var(--transition);
+}
+
+.banner-poster img:hover {
+    box-shadow: 0 30px 80px rgba(212, 175, 55, 0.5), 
+                0 0 60px rgba(0, 212, 255, 0.4);
+    transform: scale(1.05);
+}
+
+.banner-info {
+    animation: fadeInRight 0.8s ease-out;
+}
+
+.banner-title {
+    font-size: 4rem;
+    font-weight: 900;
+    letter-spacing: 3px;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, var(--accent-gold), var(--accent-blue), var(--accent-gold));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 3s ease infinite;
+    text-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% center; }
+    50% { background-position: 100% center; }
+}
+
+.banner-description {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.8;
+    max-width: 500px;
+}
+
+.banner-actions {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+/* ================================
+   BOTÕES
+   ================================ */
+
+.btn {
+    padding: 0.9rem 2rem;
+    font-size: 1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: var(--transition);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent-gold), #ffd700);
+    color: var(--primary-dark);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+}
+
+.btn-primary:hover {
+    box-shadow: 0 0 40px rgba(212, 175, 55, 0.7);
+    transform: translateY(-3px);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--accent-gold);
+    border: 2px solid var(--accent-gold);
+}
+
+.btn-secondary:hover {
+    background: rgba(212, 175, 55, 0.1);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+}
+
+/* ================================
+   SEÇÃO DE EPISÓDIOS
+   ================================ */
+
+.episodes-section {
+    max-width: 1400px;
+    margin: 5rem auto;
+    padding: 0 2rem;
+}
+
+.section-header {
+    position: relative;
+    margin-bottom: 3rem;
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: var(--accent-gold);
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+}
+
+.section-line {
+    height: 3px;
+    width: 100px;
+    background: linear-gradient(90deg, var(--accent-gold), transparent);
+    border-radius: 5px;
+}
+
+.episodes-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2rem;
+    animation: fadeIn 0.6s ease-out;
+}
+
+.episode-card {
+    position: relative;
+    cursor: pointer;
+    group: episode-card;
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.episode-poster-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    aspect-ratio: 2/3;
+    border: 2px solid rgba(212, 175, 55, 0.2);
+}
+
+.episode-poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.episode-card:hover .episode-poster {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
+.episode-poster-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+        rgba(212, 175, 55, 0.3) 0%, 
+        rgba(0, 212, 255, 0.3) 100%);
+    opacity: 0;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.episode-card:hover .episode-poster-overlay {
+    opacity: 1;
+}
+
+.play-icon {
+    font-size: 3rem;
+    color: var(--accent-gold);
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.7);
+}
+
+.episode-info {
+    padding: 1rem 0;
+}
+
+.episode-card-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.3rem;
+    transition: var(--transition);
+}
+
+.episode-card:hover .episode-card-title {
+    color: var(--accent-gold);
+}
+
+.episode-card-meta {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* ================================
+   PLAYER PAGE
+   ================================ */
+
+.player-container {
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+    min-height: calc(100vh - 200px);
+}
+
+.player-wrapper {
+    position: relative;
+    margin-bottom: 3rem;
+}
+
+.player-video {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #000;
+    border: 2px solid rgba(212, 175, 55, 0.2);
+    box-shadow: 0 0 40px rgba(212, 175, 55, 0.2);
+}
+
+.video-iframe,
+.video-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 8px;
+}
+
+.player-controls {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.player-btn {
+    padding: 0.7rem 1.5rem;
+    background: rgba(212, 175, 55, 0.1);
+    color: var(--accent-gold);
+    border: 1px solid var(--accent-gold);
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: var(--transition);
+}
+
+.player-btn:hover {
+    background: rgba(212, 175, 55, 0.2);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+}
+
+.player-info {
+    background: rgba(5, 7, 15, 0.5);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+}
+
+.back-btn {
+    margin-bottom: 2rem;
+}
+
+.back-btn a {
+    color: var(--accent-gold);
+    text-decoration: none;
+    font-weight: 700;
+    transition: var(--transition);
+}
+
+.back-btn a:hover {
+    color: var(--accent-blue);
+}
+
+.episode-header {
+    margin-bottom: 2rem;
+}
+
+.episode-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    color: var(--accent-gold);
+}
+
+.episode-meta {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+.meta-separator {
+    color: var(--accent-gold);
+}
+
+.episode-description {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    color: var(--text-secondary);
+}
+
+.episode-actions {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.episode-details {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.episode-details h3 {
+    color: var(--accent-gold);
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-label {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.detail-value {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* ================================
+   FOOTER
+   ================================ */
+
+.footer {
+    background: linear-gradient(180deg, rgba(10, 14, 39, 0.8) 0%, rgba(5, 7, 15, 0.95) 100%);
+    border-top: 1px solid var(--border-color);
+    padding: 2rem;
+    margin-top: 5rem;
+}
+
+.footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.footer-links {
+    margin-top: 1rem;
+}
+
+.footer-links a {
+    color: var(--accent-gold);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.footer-links a:hover {
+    color: var(--accent-blue);
+}
+
+.divider {
+    margin: 0 0.8rem;
+}
+
+/* ================================
+   ANIMAÇÕES
+   ================================ */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ================================
+   RESPONSIVIDADE
+   ================================ */
+
+@media (max-width: 1024px) {
+    .banner-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .banner-poster img {
+        max-width: 280px;
+    }
+
+    .banner-title {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .nav {
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .banner {
+        height: auto;
+    }
+
+    .banner-container {
+        height: auto;
+        margin-top: 3rem;
+    }
+
+    .banner-content {
+        padding: 2rem;
+    }
+
+    .banner-poster img {
+        max-width: 100%;
+    }
+
+    .banner-title {
+        font-size: 2rem;
+    }
+
+    .banner-description {
+        font-size: 1rem;
+    }
+
+    .banner-actions {
+        flex-direction: column;
+    }
+
+    .episodes-container {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .episode-title {
+        font-size: 1.8rem;
+    }
+
+    .player-info {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo-text {
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+    }
+
+    .banner-title {
+        font-size: 1.5rem;
+    }
+
+    .banner-description {
+        font-size: 0.9rem;
+    }
+
+    .btn {
+        padding: 0.7rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .section-title {
+        font-size: 1.3rem;
+    }
+
+    .episodes-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .episode-title {
+        font-size: 1.3rem;
+    }
+
+    .player-info {
+        padding: 1rem;
+    }
+}
+
+/* ================================
+   UTILIDADES
+   ================================ */
+
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(212, 175, 55, 0.2);
+    border-radius: 50%;
+    border-top-color: var(--accent-gold);
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.hidden {
+    display: none !important;
+}
+
+.no-scroll {
+    overflow: hidden;
+}

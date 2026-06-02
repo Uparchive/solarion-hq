@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOLARION | Player</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Fundo com efeito de partículas -->
+    <div id="starfield" class="starfield"></div>
+    
+    <!-- Header/Navegação -->
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">◆</span>
+                <span class="logo-text">SOLARION</span>
+                <span class="logo-icon">◆</span>
+            </a>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Início</a>
+                <a href="#" class="nav-link">Minha Lista</a>
+                <a href="#" class="nav-link">Explorar</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Conteúdo do Player -->
+    <main class="player-container">
+        <div class="player-wrapper">
+            <div class="player-video" id="playerVideo">
+                <!-- Iframe ou video tag será inserido aqui -->
+            </div>
+            <div class="player-controls">
+                <button class="player-btn fullscreen-btn" id="fullscreenBtn">
+                    ⛶ Tela Cheia
+                </button>
+            </div>
+        </div>
+
+        <div class="player-info">
+            <div class="episode-header">
+                <div class="back-btn">
+                    <a href="index.html">← Voltar</a>
+                </div>
+            </div>
+
+            <div class="episode-content">
+                <h1 id="episodeTitle" class="episode-title">Carregando...</h1>
+                
+                <div class="episode-meta">
+                    <span id="episodeSeason" class="meta-item">Temporada 1</span>
+                    <span class="meta-separator">•</span>
+                    <span id="episodeNumber" class="meta-item">Episódio 1</span>
+                    <span class="meta-separator">•</span>
+                    <span id="episodeDate" class="meta-item">2026</span>
+                </div>
+
+                <p id="episodeDescription" class="episode-description">
+                    Carregando descrição...
+                </p>
+
+                <div class="episode-actions">
+                    <button class="btn btn-primary" id="watchBtn">
+                        ▶ Assistir
+                    </button>
+                    <button class="btn btn-secondary" id="nextEpisodeBtn">
+                        ▶ Próximo Episódio
+                    </button>
+                </div>
+            </div>
+
+            <div class="episode-details">
+                <h3>Detalhes do Episódio</h3>
+                <div class="details-grid">
+                    <div class="detail-item">
+                        <span class="detail-label">Diretor:</span>
+                        <span id="episodeDirector" class="detail-value">-</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Duração:</span>
+                        <span id="episodeDuration" class="detail-value">-</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Gêneros:</span>
+                        <span id="episodeGenres" class="detail-value">Sci-Fi, Drama</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2026 SOLARION | Universo Cinematográfico de Ficção Científica</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Carregar episódio específico no player
+        document.addEventListener('DOMContentLoaded', function() {
+            loadPlayerEpisode();
+        });
+
+        function loadPlayerEpisode() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const episodeId = urlParams.get('id');
+            
+            if (!episodeId) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            const episodes = JSON.parse(localStorage.getItem('solarionEpisodes')) || [];
+            const episode = episodes.find(ep => ep.id === episodeId);
+
+            if (!episode) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Preencher informações
+            document.getElementById('episodeTitle').textContent = episode.title;
+            document.getElementById('episodeSeason').textContent = `Temporada ${episode.season || 1}`;
+            document.getElementById('episodeNumber').textContent = `Episódio ${episode.number || 1}`;
+            document.getElementById('episodeDate').textContent = episode.year || '2026';
+            document.getElementById('episodeDescription').textContent = episode.description;
+            document.getElementById('episodeDirector').textContent = episode.director || 'Solarion Studios';
+            document.getElementById('episodeDuration').textContent = episode.duration || '45 min';
+
+            // Carregar o vídeo
+            const playerVideo = document.getElementById('playerVideo');
+            if (episode.videoUrl) {
+                if (episode.videoUrl.includes('youtube.com') || episode.videoUrl.includes('youtu.be')) {
+                    const videoId = extractYouTubeId(episode.videoUrl);
+                    playerVideo.innerHTML = `<iframe class="video-iframe" src="https://www.youtube.com/embed/${videoId}?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>`;
+                } else if (episode.videoUrl.includes('vimeo.com')) {
+                    const videoId = extractVimeoId(episode.videoUrl);
+                    playerVideo.innerHTML = `<iframe class="video-iframe" src="https://player.vimeo.com/video/${videoId}" frameborder="0" allowfullscreen allow="autoplay"></iframe>`;
+                } else {
+                    playerVideo.innerHTML = `<video class="video-player" controls autoplay><source src="${episode.videoUrl}" type="video/mp4"></video>`;
+                }
+            }
+
+            // Botão do próximo episódio
+            const nextEpisode = episodes[episodes.indexOf(episode) + 1];
+            if (nextEpisode) {
+                document.getElementById('nextEpisodeBtn').onclick = () => {
+                    window.location.href = `player.html?id=${nextEpisode.id}`;
+                };
+            } else {
+                document.getElementById('nextEpisodeBtn').style.display = 'none';
+            }
+
+            // Fullscreen
+            document.getElementById('fullscreenBtn').onclick = () => {
+                playerVideo.requestFullscreen ? playerVideo.requestFullscreen() : 
+                playerVideo.webkitRequestFullscreen ? playerVideo.webkitRequestFullscreen() : null;
+            };
+        }
+
+        function extractYouTubeId(url) {
+            const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/);
+            return match ? match[1] : '';
+        }
+
+        function extractVimeoId(url) {
+            const match = url.match(/vimeo\.com\/(\d+)/);
+            return match ? match[1] : '';
+        }
+    </script>
+</body>
+</html>

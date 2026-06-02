@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOLARION | Painel Administrativo</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <!-- Fundo com efeito de partículas -->
+    <div id="starfield" class="starfield"></div>
+
+    <!-- Login Screen -->
+    <div id="loginContainer" class="login-container">
+        <div class="login-box">
+            <div class="login-logo">
+                <span class="logo-icon">◆</span>
+                <span class="logo-text">SOLARION</span>
+                <span class="logo-icon">◆</span>
+            </div>
+            <h1>Painel Administrativo</h1>
+            <p class="login-subtitle">Acesso Restrito</p>
+
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="username">Usuário:</label>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        placeholder="admin" 
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Senha:</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        placeholder="••••••••" 
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="btn-login">Entrar</button>
+
+                <div id="loginError" class="login-error" style="display: none;">
+                    Usuário ou senha incorretos
+                </div>
+            </form>
+
+            <p class="login-hint">
+                Credenciais: admin / solarion2026@
+            </p>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div id="adminContainer" class="admin-container" style="display: none;">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <span>◆</span> SOLARION <span>◆</span>
+                </div>
+                <button id="logoutBtn" class="logout-btn">
+                    Sair
+                </button>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-section="episodes">
+                    📺 Episódios
+                </a>
+                <a href="#" class="nav-item" data-section="add-episode">
+                    ➕ Novo Episódio
+                </a>
+                <a href="#" class="nav-item" data-section="settings">
+                    ⚙️ Configurações
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Header -->
+            <div class="admin-header">
+                <h1 id="sectionTitle">Gerenciar Episódios</h1>
+                <div class="header-actions">
+                    <span id="sessionInfo" class="session-info">Sessão Ativa</span>
+                </div>
+            </div>
+
+            <!-- Sections -->
+
+            <!-- Seção: Listar Episódios -->
+            <section id="episodes-section" class="admin-section active">
+                <div class="section-content">
+                    <div class="episodes-list-header">
+                        <h2>Episódios Publicados</h2>
+                        <button class="btn btn-primary" onclick="switchSection('add-episode')">
+                            ➕ Novo Episódio
+                        </button>
+                    </div>
+
+                    <div id="episodesList" class="episodes-list">
+                        <!-- Episódios carregados dinamicamente -->
+                    </div>
+
+                    <div id="noEpisodes" class="empty-state" style="display: none;">
+                        <p>Nenhum episódio publicado</p>
+                        <button class="btn btn-primary" onclick="switchSection('add-episode')">
+                            Criar Primeiro Episódio
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção: Adicionar/Editar Episódio -->
+            <section id="add-episode-section" class="admin-section">
+                <div class="section-content">
+                    <h2>
+                        <span id="formTitle">Novo Episódio</span>
+                        <button id="backBtn" class="btn-back" style="display: none;">← Voltar</button>
+                    </h2>
+
+                    <form id="episodeForm" class="episode-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="title">Título do Episódio *</label>
+                                <input 
+                                    type="text" 
+                                    id="title" 
+                                    placeholder="Ex: Despertar Cósmico"
+                                    required
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label for="season">Temporada *</label>
+                                <input 
+                                    type="number" 
+                                    id="season" 
+                                    placeholder="1"
+                                    min="1"
+                                    value="1"
+                                    required
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label for="number">Número do Episódio *</label>
+                                <input 
+                                    type="number" 
+                                    id="number" 
+                                    placeholder="1"
+                                    min="1"
+                                    value="1"
+                                    required
+                                >
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group full-width">
+                                <label for="description">Descrição *</label>
+                                <textarea 
+                                    id="description" 
+                                    placeholder="Descreva o episódio aqui..."
+                                    rows="4"
+                                    required
+                                ></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="director">Diretor</label>
+                                <input 
+                                    type="text" 
+                                    id="director" 
+                                    placeholder="Solarion Studios"
+                                    value="Solarion Studios"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label for="duration">Duração</label>
+                                <input 
+                                    type="text" 
+                                    id="duration" 
+                                    placeholder="45 min"
+                                    value="45 min"
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label for="year">Ano</label>
+                                <input 
+                                    type="number" 
+                                    id="year" 
+                                    placeholder="2026"
+                                    value="2026"
+                                >
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group full-width">
+                                <label for="videoUrl">Link do Vídeo *</label>
+                                <input 
+                                    type="url" 
+                                    id="videoUrl" 
+                                    placeholder="https://youtube.com/watch?v=... ou URL do MP4"
+                                    required
+                                >
+                                <small>YouTube, Vimeo ou link direto para MP4</small>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group full-width">
+                                <label for="poster">URL da Imagem de Capa *</label>
+                                <input 
+                                    type="url" 
+                                    id="poster" 
+                                    placeholder="https://exemplo.com/poster.jpg"
+                                    required
+                                >
+                                <small>Previewe a imagem abaixo</small>
+                            </div>
+                        </div>
+
+                        <div class="poster-preview">
+                            <img id="posterPreview" src="" alt="Preview do poster" style="display: none;">
+                            <div id="posterError" class="poster-error" style="display: none;">
+                                Erro ao carregar imagem
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <span id="submitBtnText">Publicar Episódio</span>
+                            </button>
+                            <button 
+                                type="button" 
+                                id="deleteBtnForm" 
+                                class="btn btn-danger" 
+                                style="display: none;"
+                                onclick="deleteCurrentEpisode()"
+                            >
+                                Deletar Episódio
+                            </button>
+                            <button 
+                                type="button" 
+                                class="btn btn-secondary" 
+                                onclick="switchSection('episodes')"
+                            >
+                                Cancelar
+                            </button>
+                        </div>
+
+                        <input type="hidden" id="editingId" value="">
+                    </form>
+                </div>
+            </section>
+
+            <!-- Seção: Configurações -->
+            <section id="settings-section" class="admin-section">
+                <div class="section-content">
+                    <h2>Configurações</h2>
+
+                    <div class="settings-box">
+                        <h3>Gerenciamento de Dados</h3>
+                        
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Resetar Dados</h4>
+                                <p>Restaurar episódios padrão (será removido o histórico atual)</p>
+                            </div>
+                            <button class="btn btn-warning" onclick="resetEpisodes()">
+                                Resetar
+                            </button>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Exportar Dados</h4>
+                                <p>Baixar backup de todos os episódios em JSON</p>
+                            </div>
+                            <button class="btn btn-secondary" onclick="exportData()">
+                                Exportar
+                            </button>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-info">
+                                <h4>Total de Episódios</h4>
+                                <p id="episodeCount">-</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-box">
+                        <h3>Informações do Site</h3>
+                        <div class="info-grid">
+                            <div>
+                                <strong>Versão:</strong> 1.0.0
+                            </div>
+                            <div>
+                                <strong>Armazenamento:</strong> localStorage
+                            </div>
+                            <div>
+                                <strong>Compatibilidade:</strong> GitHub Pages
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script src="../script.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>
