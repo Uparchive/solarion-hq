@@ -1,0 +1,17 @@
+{
+  "type": "gitverse-video",
+  "version": 1,
+  "name": "EP 1 - A ORIGEM DE ZEL'LION.mp4",
+  "mimeType": "video/mp4",
+  "originalSize": 107158954,
+  "chunkSize": 20971520,
+  "chunks": [
+    ".gitverse-video/EP 1 - A ORIGEM DE ZEL'LION-cfefc486/parte0001.mp4",
+    ".gitverse-video/EP 1 - A ORIGEM DE ZEL'LION-cfefc486/parte0002.mp4",
+    ".gitverse-video/EP 1 - A ORIGEM DE ZEL'LION-cfefc486/parte0003.mp4",
+    ".gitverse-video/EP 1 - A ORIGEM DE ZEL'LION-cfefc486/parte0004.mp4",
+    ".gitverse-video/EP 1 - A ORIGEM DE ZEL'LION-cfefc486/parte0005.mp4",
+    ".gitverse-video/EP 1 - A ORIGEM DE ZEL'LION-cfefc486/parte0006.mp4"
+  ],
+  "createdAt": "2026-06-07T06:32:48.673Z"
+}
